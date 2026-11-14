@@ -237,7 +237,7 @@ function TaskForm({
                 locale={es}
                 weekStartsOn={1}
                 selected={dueDate ? parseISO(dueDate) : undefined}
-                defaultMonth={dueDate ? parseISO(dueDate) : undefined}
+                {...(dueDate ? { defaultMonth: parseISO(dueDate) } : {})}
                 onSelect={(d) => {
                   setDueDate(d ? format(d, "yyyy-MM-dd") : null);
                   setDateOpen(false);

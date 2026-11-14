@@ -29,14 +29,14 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 /** Parse raw search params, silently dropping invalid values. */
 export function parseTaskFilters(search: Record<string, unknown>): TaskFilters {
   const out: TaskFilters = {};
-  if (typeof search.q === "string" && search.q.trim() !== "") out.q = search.q;
-  if (typeof search.cat === "string" && (search.cat === "none" || UUID_RE.test(search.cat))) {
-    out.cat = search.cat;
+  if (typeof search["q"] === "string" && search["q"].trim() !== "") out.q = search["q"];
+  if (typeof search["cat"] === "string" && (search["cat"] === "none" || UUID_RE.test(search["cat"]))) {
+    out.cat = search["cat"];
   }
-  if (typeof search.prio === "string" && (PRIORITIES as string[]).includes(search.prio)) {
-    out.prio = search.prio as Priority;
+  if (typeof search["prio"] === "string" && (PRIORITIES as string[]).includes(search["prio"])) {
+    out.prio = search["prio"] as Priority;
   }
-  if (search.status === "all" || search.status === "completed") out.status = search.status;
+  if (search["status"] === "all" || search["status"] === "completed") out.status = search["status"];
   return out;
 }
 
