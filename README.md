@@ -1,6 +1,6 @@
-# Proyecto de prueba 1
+# Gestor de Operaciones Pro
 
-Proyecto de prueba 1
+SaaS de gestión de tareas con prioridades y categorías. Desarrollado con arquitectura escalable, autenticación segura y despliegue automatizado.
 
 This project was built with [Lovable](https://lovable.dev).
 
