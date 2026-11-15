@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Task filtering, search, sorting and counters live as pure functions in `src/lib/tasks.ts` and run in memory over the single `["tasks"]` query; keep them pure so `src/test/task-rules.test.ts` covers them.
+- Dashboard filters are URL search params parsed by `parseTaskFilters`; invalid values are dropped and the default `pending` status is never written, so links stay shareable and reload-safe.
