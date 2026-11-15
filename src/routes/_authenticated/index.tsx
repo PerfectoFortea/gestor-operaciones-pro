@@ -78,6 +78,19 @@ const STATUS_OPTIONS = [
 
 const LEAVE_MS = 500;
 
+/** A filter change; `undefined` clears that filter. */
+type FilterPatch = { [K in keyof TaskFilters]?: TaskFilters[K] | undefined };
+
+/** Drops cleared keys so the URL only keeps active filters. */
+function withoutEmpty(search: FilterPatch): TaskFilters {
+  const out: TaskFilters = {};
+  if (search.q) out.q = search.q;
+  if (search.cat) out.cat = search.cat;
+  if (search.prio) out.prio = search.prio;
+  if (search.status) out.status = search.status;
+  return out;
+}
+
 function Dashboard() {
   const filters = Route.useSearch();
   const navigate = useNavigate({ from: "/" });
@@ -123,8 +136,8 @@ function Dashboard() {
   const firstName = name.split(/\s+/)[0];
 
   const setFilter = useCallback(
-    (patch: Partial<TaskFilters>) =>
-      navigate({ search: (prev) => ({ ...prev, ...patch }), replace: true }),
+    (patch: FilterPatch) =>
+      navigate({ search: (prev) => withoutEmpty({ ...prev, ...patch }), replace: true }),
     [navigate],
   );
   const onSearch = useCallback((q: string | undefined) => setFilter({ q }), [setFilter]);
